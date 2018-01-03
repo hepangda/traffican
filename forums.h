@@ -24,3 +24,10 @@ extern UIForm UFRouteList;
 
 extern UINormal UFAdvice;
 extern UIQuery UFAskAdvice;
+extern UINormal UFAdviceLesstime;
+extern UINormal UFAdviceLessprice;
+extern UINormal UFAdviceLesstrans;
+
+extern UIQuery UFAskLtime;
+extern UIQuery UFAskLprice;
+extern UIQuery UFAskLtrans;

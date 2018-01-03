@@ -22,6 +22,12 @@ int HRouteList(UIArguments args, UIInputDelegater dg);
 int HAdvice(UIArguments args, UIInputDelegater dg);
 int HAskAdvice(UIArguments args, UIInputDelegater dg);
 
+int HLessprice(UIArguments args, UIInputDelegater dg);
+int HLesstime(UIArguments args, UIInputDelegater dg);
+int HLesstrans(UIArguments args, UIInputDelegater dg);
+int HAskLprice(UIArguments args, UIInputDelegater dg);
+int HAskLtime(UIArguments args, UIInputDelegater dg);
+int HAskLtrans(UIArguments args, UIInputDelegater dg);
 
 class HChoiceDelegater {
 private:

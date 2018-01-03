@@ -34,3 +34,6 @@ struct RouteRequest {
     std::string from, to, type, starts, ends;
     long price;
 };
+
+Time timeAdd(const Time a, const Time b);
+Time timeMinus(const Time a, const Time b);

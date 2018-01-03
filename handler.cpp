@@ -129,9 +129,9 @@ int HAskAdvice(UIArguments args, UIInputDelegater dg)
 {    
     HChoiceDelegater h(&UFAskAdvice);
     function<void()> doings[] = {
-       []() { cout << "Fewest Time" << endl; },
-       []() { cout << "Lowest Cost" << endl; },
-       []() { cout << "Fewest Path" << endl; },
+       []() { UIGlobal::set(UFAdviceLesstime); },
+       []() { UIGlobal::set(UFAdviceLessprice); },
+       []() { UIGlobal::set(UFAdviceLesstrans); },
        []() { UIGlobal::setAndClear(UFMainmenu); }
     };
 
@@ -257,52 +257,38 @@ int HRouteList(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+int HLessprice(UIArguments args, UIInputDelegater dg)
+{
+    UIGlobal::set(UFAskLprice);
+    return 0;
+}
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+int HLesstime(UIArguments args, UIInputDelegater dg)
+{
+    UIGlobal::set(UFAskLtime);
+    return 0;
+}
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+int HLesstrans(UIArguments args, UIInputDelegater dg)
+{
+    UIGlobal::set(UFAskLtrans);
+    return 0;
+}
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+int HAskLprice(UIArguments args, UIInputDelegater dg)
+{
+    UIGlobal::setAndClear(UFAdvice);
+    return 0;
+}
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+int HAskLtime(UIArguments args, UIInputDelegater dg)
+{
+    UIGlobal::setAndClear(UFAdvice);
+    return 0;
+}
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
-
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
-
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
-
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
-
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+int HAskLtrans(UIArguments args, UIInputDelegater dg)
+{
+    UIGlobal::setAndClear(UFAdvice);
+    return 0;
+}
