@@ -5,6 +5,7 @@
 using namespace std;
 
 extern long idMaker;
+extern long cityidMaker;
 vector<City> IOCity;
 vector<Route> IORoute;
 const char IO::CityFile[] = "City.dat";
@@ -24,6 +25,7 @@ int IO::WriteCity()
 
     FILE *fp = fopen(CityFile, "wb+");
     int size = IOCity.size();
+    fwrite(&cityidMaker, sizeof(long), 1, fp);
     fwrite(&size, sizeof(int), 1, fp);
     for (auto &i: IOCity) {
         writeOne(fp, i);
@@ -93,6 +95,7 @@ int IO::ReadAll()
     FILE *fc = fopen(CityFile, "rb");
     if (fc != nullptr) {
         int sc;
+        fread(&cityidMaker, sizeof(long), 1, fc);
         fread(&sc, sizeof(int), 1, fc);
         for (int i = 0; i < sc; i ++)
             IOCity.push_back(readOneCity(fc));

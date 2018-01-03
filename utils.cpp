@@ -1,6 +1,6 @@
 #include"utils.h"
 
-long City::idMaker = 0;
+long cityidMaker = 0;
 
 Time timeAdd(const Time a, const Time b)
 {

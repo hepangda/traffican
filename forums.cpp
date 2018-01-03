@@ -110,10 +110,6 @@ UIQuery UFAskAdvice(HAskAdvice, genericDelegater,
 "   > 请选择"
 });
 
-UINormal UFAdviceLesstime(HLesstime, genericDelegater, {});
-UINormal UFAdviceLessprice(HLessprice, genericDelegater, {});
-UINormal UFAdviceLesstrans(HLesstrans, genericDelegater, {});
-
 UIQuery UFAskLtime(HAskLtime, genericDelegater,
 {
 "   > 起点",

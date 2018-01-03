@@ -15,7 +15,6 @@ extern UIQuery UFCityEdit;
 extern UIQuery UFCityDelete;
 extern UIForm UFCityList;
 
-
 extern UINormal UFRouteMgr;
 extern UIQuery UFAskRouteMgr;
 extern UIQuery UFRouteAdd;
@@ -24,9 +23,6 @@ extern UIForm UFRouteList;
 
 extern UINormal UFAdvice;
 extern UIQuery UFAskAdvice;
-extern UINormal UFAdviceLesstime;
-extern UINormal UFAdviceLessprice;
-extern UINormal UFAdviceLesstrans;
 
 extern UIQuery UFAskLtime;
 extern UIQuery UFAskLprice;

@@ -5,7 +5,6 @@ struct City {
     std::string name;
     std::string intro;
     long id;
-    static long idMaker;
     bool operator==(std::string name)
     {
         return this->name == name;

@@ -38,11 +38,12 @@ int Service::deleteCity(string name)
 
 int Service::loadCity(UIForm &form)
 {
-    vector<int> widths = { 20, 40 };
-    vector<string> titles = { "城市", "城市介绍" };
+    vector<int> widths = { 8, 20, 40 };
+    vector<string> titles = { "ID", "城市", "城市介绍" };
     vector<vector<string> > lists;
     lists.resize(IOCity.size());
     for (int i = 0; i < IOCity.size(); i++) {
+        lists[i].push_back(to_string(IOCity[i].id));
         lists[i].push_back(IOCity[i].name);
         lists[i].push_back(IOCity[i].intro);
     }

@@ -1,7 +1,9 @@
 #include"handler.h"
 #include"utils.h"
 #include"services.h"
+#include"algo.h"
 using namespace std;
+extern long cityidMaker;
 
 void HChoiceDelegater::DEFAULT_FAULT()
 {
@@ -129,9 +131,9 @@ int HAskAdvice(UIArguments args, UIInputDelegater dg)
 {    
     HChoiceDelegater h(&UFAskAdvice);
     function<void()> doings[] = {
-       []() { UIGlobal::set(UFAdviceLesstime); },
-       []() { UIGlobal::set(UFAdviceLessprice); },
-       []() { UIGlobal::set(UFAdviceLesstrans); },
+       []() { UIGlobal::set(UFAskLtime); },
+       []() { UIGlobal::set(UFAskLprice); },
+       []() { UIGlobal::set(UFAskLtrans); },
        []() { UIGlobal::setAndClear(UFMainmenu); }
     };
 
@@ -155,7 +157,7 @@ int HCityAdd(UIArguments args, UIInputDelegater dg)
         std::cout << "   > 该城市已存在，添加失败" << std::endl;
     };
 
-    City info = { dg.getString(args[0]).val, dg.getString(args[1]).val, City::idMaker++ };
+    City info = { dg.getString(args[0]).val, dg.getString(args[1]).val, cityidMaker++ };
     UIGlobal::setAndClear(UFCityMgr, (Service::addCity(info) == Service::SUCCESS) ? resOK : resNope);
     return 0;
 }
@@ -257,28 +259,57 @@ int HRouteList(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HLessprice(UIArguments args, UIInputDelegater dg)
+template<typename T>
+static int TAskL(UIArguments args, UIInputDelegater dg)
 {
-    UIGlobal::set(UFAskLprice);
-    return 0;
-}
+    static function<void()> resNoway = []()
+    {
+        std::cout << "   > 两城市之间无法到达！" << std::endl;
+    };
 
-int HLesstime(UIArguments args, UIInputDelegater dg)
-{
-    UIGlobal::set(UFAskLtime);
-    return 0;
-}
+    static function<void()> resNope = []()
+    {
+        std::cout << "   > 输入的数据格式有误！" << std::endl;
+    };
 
-int HLesstrans(UIArguments args, UIInputDelegater dg)
-{
-    UIGlobal::set(UFAskLtrans);
+    try {
+        UIGlobal::clear();
+        long from = Service::cityIDFromString(dg.getString(args[0]).val),
+             to = Service::cityIDFromString(dg.getString(args[1]).val),
+             tm = Service::timeFromString(dg.getString(args[2]).val);
+
+        T dijkstra;
+        auto ret = dijkstra(from, to, tm);
+
+        cout << "  # 根据您的要求，已为您选择最适合的出行方式：  " << endl << endl;
+
+        for (int i = 0; i < ret.travel.size(); i++) {
+            cout << "   > " << i + 1<< ". " << "乘坐 " << Service::typeStringFromID(ret.travel[i].type)
+                 << " 由 " << Service::cityStringFromID(ret.travel[i].from) << " 前往 " 
+                 << Service::cityStringFromID(ret.travel[i].to) << endl;
+        }
+        cout << endl << endl;
+
+        if (ret.tp == -1)
+            UIGlobal::clear(resNoway);
+    } catch (...) {
+        UIGlobal::clear(resNope);
+    }
+
+    UIGlobal::set(UFAdvice);
     return 0;
 }
 
 int HAskLprice(UIArguments args, UIInputDelegater dg)
 {
-    UIGlobal::setAndClear(UFAdvice);
-    return 0;
+    struct LP {
+        Path operator()(long from, long to, Time tm)
+        {
+            return Algorithm::dijkstra<Algorithm::LessPrice>(from, to, tm);
+        }
+    };
+
+    return TAskL<LP>(args, dg);
 }
 
 int HAskLtime(UIArguments args, UIInputDelegater dg)
