@@ -1,6 +1,6 @@
 #include"services.h"
 #include"io.h"
-
+#include<algorithm>
 using namespace std;
 
 int Service::addCity(City x)
@@ -9,20 +9,25 @@ int Service::addCity(City x)
     return SUCCESS;
 }
 
-City *Service::findCity(string name)
+vector<City>::iterator Service::findCity(string name)
 {
-    for (auto &i: IOCity) {
-        if (i.name == name)
-            return &i;
-    }
-    return nullptr;
+    return find(IOCity.begin(), IOCity.end(), name);
 }
 
 int Service::editCity(string name, City info)
 {
-    City *p = findCity(name);
-    if (p == nullptr)
+    auto it = findCity(name);
+    if (it == IOCity.end())
         return NOT_FOUND;
-    *p = info;
+    *it = info;
+    return SUCCESS;
+}
+
+int Service::deleteCity(string name)
+{
+    auto it = findCity(name);
+    if (it == IOCity.end())
+        return NOT_FOUND;
+    IOCity.erase(it);
     return SUCCESS;
 }
