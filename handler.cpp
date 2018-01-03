@@ -279,7 +279,7 @@ static int TAskL(UIArguments args, UIInputDelegater dg)
              tm = Service::timeFromString(dg.getString(args[2]).val);
 
         T dijkstra;
-        auto ret = dijkstra(from, to, tm);
+        auto ret = Algorithm::dijkstra<T>(from, to, tm);
 
         cout << "  # 根据您的要求，已为您选择最适合的出行方式：  " << endl << endl;
 
@@ -302,24 +302,15 @@ static int TAskL(UIArguments args, UIInputDelegater dg)
 
 int HAskLprice(UIArguments args, UIInputDelegater dg)
 {
-    struct LP {
-        Path operator()(long from, long to, Time tm)
-        {
-            return Algorithm::dijkstra<Algorithm::LessPrice>(from, to, tm);
-        }
-    };
-
-    return TAskL<LP>(args, dg);
+    return TAskL<Algorithm::LessPrice>(args, dg);
 }
 
 int HAskLtime(UIArguments args, UIInputDelegater dg)
 {
-    UIGlobal::setAndClear(UFAdvice);
-    return 0;
+    return TAskL<Algorithm::LessTime>(args, dg);
 }
 
 int HAskLtrans(UIArguments args, UIInputDelegater dg)
 {
-    UIGlobal::setAndClear(UFAdvice);
-    return 0;
+    return TAskL<Algorithm::LessTrans>(args, dg);
 }
