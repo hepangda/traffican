@@ -1,4 +1,6 @@
 #include"handler.h"
+#include"utils.h"
+#include"services.h"
 using namespace std;
 
 void HChoiceDelegater::DEFAULT_FAULT()
@@ -90,7 +92,7 @@ int HAskCityMgr(UIArguments args, UIInputDelegater dg)
 {
     HChoiceDelegater h(&UFCityMgr);
     function<void()> doings[] = {
-       []() { cout << "List City" << endl; },
+       []() { UIGlobal::set(UFCityList); },
        []() { UIGlobal::set(UFCityAdd); },
        []() { UIGlobal::set(UFCityEdit); },
        []() { UIGlobal::set(UFCityDelete); },
@@ -109,14 +111,13 @@ int HAskRouteMgr(UIArguments args, UIInputDelegater dg)
 {    
     HChoiceDelegater h(&UFRouteMgr);
     function<void()> doings[] = {
-       []() { cout << "List Route" << endl; },
-       []() { cout << "Add Route" << endl; },
-       []() { cout << "Edit Route" << endl; },
-       []() { cout << "Delete Route" << endl; },
+       []() { UIGlobal::set(UFRouteList); },
+       []() { UIGlobal::set(UFRouteAdd); },
+       []() { UIGlobal::set(UFRouteDelete); },
        []() { UIGlobal::setAndClear(UFMainmenu); }
     };
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
         h.bind(i + 1, doings[i]);
     }
     
@@ -144,50 +145,117 @@ int HAskAdvice(UIArguments args, UIInputDelegater dg)
 
 int HCityAdd(UIArguments args, UIInputDelegater dg)
 {
-    UIGlobal::setAndClear(UFCityMgr, []()
+    static function<void()> resOK = []()
     {
         std::cout << "   > 添加成功，请确认" << std::endl;
-    });
+    };
+
+    static function<void()> resNope = []()
+    {
+        std::cout << "   > 该城市已存在，添加失败" << std::endl;
+    };
+
+    City info = { dg.getString(args[0]).val, dg.getString(args[1]).val, City::idMaker++ };
+    UIGlobal::setAndClear(UFCityMgr, (Service::addCity(info) == Service::SUCCESS) ? resOK : resNope);
     return 0;
 }
 
 int HCityEdit(UIArguments args, UIInputDelegater dg)
 {
-    UIGlobal::setAndClear(UFCityMgr, []()
+    static function<void()> resOK = []()
     {
-        std::cout << "   > 编辑成功？失败？" << std::endl;
-    });
+        std::cout << "   > 城市介绍已更新" << std::endl;
+    };
+
+    static function<void()> resNope = []()
+    {
+        std::cout << "   > 该城市不存在，编辑失败" << std::endl;
+    };
+
+    City info = { dg.getString(args[0]).val, dg.getString(args[1]).val, 0 };
+    UIGlobal::setAndClear(UFCityMgr, (Service::editCity(info) == Service::SUCCESS) ? resOK : resNope);
+
     return 0;
 }
 
 int HCityDelete(UIArguments args, UIInputDelegater dg)
 {
-    UIGlobal::setAndClear(UFCityMgr, []()
+    static function<void()> resOK = []()
     {
-        std::cout << "   > 删除成功？失败？" << std::endl;
-    });
+        std::cout << "   > 已删除该城市" << std::endl;
+    };
+
+    static function<void()> resNope = []()
+    {
+        std::cout << "   > 要删除的城市不存在" << std::endl;
+    };
+
+    UIGlobal::setAndClear(UFCityMgr, 
+        (Service::deleteCity(dg.getString(args[0]).val) == Service::SUCCESS) ? resOK : resNope);
     return 0;
 }
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+int HCityList(UIArguments args, UIInputDelegater dg)
+{
+    Service::loadCity(UFCityList); 
+    UIGlobal::setAndClear(UFCityMgr);
+    return 0;
+}
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+int HRouteAdd(UIArguments args, UIInputDelegater dg)
+{
+    static function<void()> resOK = []()
+    {
+        std::cout << "   > 创建线路成功！" << std::endl;
+    };
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+    static function<void()> resNope = []()
+    {
+        std::cout << "   > 创建失败！输入的数据不合法" << std::endl;
+    };
 
-// int H(UIArguments args, UIInputDelegater dg)
-// {
-//     return 0;
-// }
+    try {
+        RouteRequest req = {
+            dg.getString(args[0]).val, dg.getString(args[1]).val, dg.getString(args[2]).val, 
+            dg.getString(args[3]).val, dg.getString(args[4]).val, dg.getInt(args[5]).val, 
+        };
+
+        UIGlobal::setAndClear(UFRouteMgr, 
+            (Service::addRoute(req) == Service::SUCCESS) ? resOK : resNope);
+    } catch (...) {
+        UIGlobal::setAndClear(UFRouteMgr, resNope);
+    }
+    return 0;
+}
+
+int HRouteDelete(UIArguments args, UIInputDelegater dg)
+{
+    static function<void()> resOK = []()
+    {
+        std::cout << "   > 已删除该路线" << std::endl;
+    };
+
+    static function<void()> resNope = []()
+    {
+        std::cout << "   > 要删除的路线不存在" << std::endl;
+    };
+
+    int res;
+    try {
+        UIGlobal::setAndClear(UFRouteMgr, 
+            (Service::deleteRoute(dg.getInt(args[0]).val) == Service::SUCCESS) ? resOK : resNope);
+    } catch (...) {
+        UIGlobal::setAndClear(UFRouteMgr, resNope);
+    }
+    return 0;
+}
+
+int HRouteList(UIArguments args, UIInputDelegater dg)
+{
+    Service::loadRoute(UFRouteList); 
+    UIGlobal::setAndClear(UFRouteMgr);
+    return 0;
+}
 
 // int H(UIArguments args, UIInputDelegater dg)
 // {

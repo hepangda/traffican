@@ -143,10 +143,13 @@ void UIForm::put(vector<int> widths, vector<string> names, vector<vector<string>
 
 void UIForm::act(std::ostream &os)
 {
+    handler(vector<int>{}, delegater);
     if (!set)
         return;
+
     auto sepline = [](int allen)
     {
+        cout << "  ";
         for (int i = 0; i < allen; i++)
             cout << "=";
         cout << endl;
@@ -157,18 +160,19 @@ void UIForm::act(std::ostream &os)
         allen += i + 1;
     }
     sepline(allen);
+    cout << "  ";
     for (int i = 0; i < widths.size(); i++) {
         cout << setw(widths[i]) << left << names[i] << " ";
     }
     cout << endl;
     sepline(allen);
     for (int i = 0; i < content.size(); i++) {
+        cout << "  ";
         for (int j = 0; j < widths.size(); j++) {
-            cout << setw(widths[i]) << left << content[i][j] << " ";
+            cout << setw(widths[j]) << left << content[i][j] << " ";
         }
         cout << endl;
     }
     sepline(allen);
-
-    handler(vector<int>{}, delegater);
+    cout << endl << endl;
 }

@@ -11,9 +11,13 @@ int HAskCityMgr(UIArguments args, UIInputDelegater dg);
 int HCityAdd(UIArguments args, UIInputDelegater dg);
 int HCityEdit(UIArguments args, UIInputDelegater dg);
 int HCityDelete(UIArguments args, UIInputDelegater dg);
+int HCityList(UIArguments args, UIInputDelegater dg);
 
 int HRouteMgr(UIArguments args, UIInputDelegater dg);
 int HAskRouteMgr(UIArguments args, UIInputDelegater dg);
+int HRouteAdd(UIArguments args, UIInputDelegater dg);
+int HRouteDelete(UIArguments args, UIInputDelegater dg);
+int HRouteList(UIArguments args, UIInputDelegater dg);
 
 int HAdvice(UIArguments args, UIInputDelegater dg);
 int HAskAdvice(UIArguments args, UIInputDelegater dg);

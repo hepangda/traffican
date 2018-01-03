@@ -32,7 +32,7 @@ UINormal UFCityMgr(HCityMgr, genericDelegater,
 "  ==================== 城市信息管理 =====================  ",
 "                   1. 列出现有城市",
 "                   2. 增加新的城市",
-"                   3. 修改已有城市",
+"                   3. 修改城市介绍",
 "                   4. 删除已有城市",
 "                   5. 返回上级菜单",
 "  ======================================================  "
@@ -51,7 +51,7 @@ UIQuery UFCityAdd(HCityAdd, genericDelegater,
 
 UIQuery UFCityEdit(HCityEdit, genericDelegater,
 {
-"   > 城市名",
+"   > 要修改的城市名",
 "   > 城市介绍"
 });
 
@@ -60,14 +60,15 @@ UIQuery UFCityDelete(HCityDelete, genericDelegater,
 "   > 城市名"
 });
 
+UIForm UFCityList(HCityList, genericDelegater);
+
 UINormal UFRouteMgr(HRouteMgr, genericDelegater,
 {
 "  ==================== 交通线路管理 =====================  ",
 "                   1. 列出现有线路",
 "                   2. 新增一条线路",
-"                   3. 修改某条线路",
-"                   4. 删除已有线路",
-"                   5. 返回上级菜单",
+"                   3. 删除已有线路",
+"                   4. 返回上级菜单",
 "  ======================================================  "
 });
 
@@ -75,6 +76,23 @@ UIQuery UFAskRouteMgr(HAskRouteMgr, genericDelegater,
 {
 "   > 请选择"
 });
+
+UIQuery UFRouteAdd(HRouteAdd, genericDelegater,
+{
+"   > 起始城市",
+"   > 终点城市",
+"   > 类型(火车/飞机/高铁)",
+"   > 开始时间(时:分:秒)",
+"   > 结束时间(时:分:秒)",
+"   > 票价(元)"
+});
+
+UIQuery UFRouteDelete(HRouteDelete, genericDelegater,
+{
+"   > 路线ID"
+});
+
+UIForm UFRouteList(HRouteList, genericDelegater);
 
 UINormal UFAdvice(HAdvice, genericDelegater,
 {
