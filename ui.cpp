@@ -6,6 +6,7 @@ using namespace std;
 
 bool UIGlobal::watchdog = true;
 UINormal *UIGlobal::nextUI = nullptr;
+UIInputDelegater UIInputDelegater::generic;
 const std::string UINormal::CLEAR = "\n";
 
 void UIGlobal::clear()

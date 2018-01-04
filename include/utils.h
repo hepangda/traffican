@@ -1,10 +1,16 @@
 #pragma once
 #include<string>
+#include<vector>
+
+typedef long Time;
+Time timeAdd(const Time a, const Time b);
+Time timeMinus(const Time a, const Time b);
 
 struct City {
     std::string name;
     std::string intro;
     long id;
+    
     bool operator==(std::string name)
     {
         return this->name == name;
@@ -15,8 +21,6 @@ struct City {
         return this->id == id;
     }
 };
-
-typedef long Time;
 
 struct Route {
     long from, to, price;
@@ -34,5 +38,8 @@ struct RouteRequest {
     long price;
 };
 
-Time timeAdd(const Time a, const Time b);
-Time timeMinus(const Time a, const Time b);
+struct Path {
+    long tp, power, tm;
+    std::vector<Route> travel;
+};
+

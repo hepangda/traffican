@@ -42,37 +42,37 @@ void HChoiceDelegater::act(UIArguments args, UIInputDelegater dg)
         execFault();
 }
 
-int HMainmenu(UIArguments args, UIInputDelegater dg)
+int Handlers::mainmenu(UIArguments args, UIInputDelegater dg)
 {
     UIGlobal::set(UFAskMainmenu);
     return 0;
 }
 
-int HExit(UIArguments args, UIInputDelegater dg)
+int Handlers::exit(UIArguments args, UIInputDelegater dg)
 {
     UIGlobal::abort();
     return 0;
 }
 
-int HCityMgr(UIArguments args, UIInputDelegater dg)
+int Handlers::cityMgr(UIArguments args, UIInputDelegater dg)
 {
     UIGlobal::set(UFAskCityMgr);
     return 0;
 }
 
-int HRouteMgr(UIArguments args, UIInputDelegater dg)
+int Handlers::routeMgr(UIArguments args, UIInputDelegater dg)
 {
     UIGlobal::set(UFAskRouteMgr);
     return 0;
 }
 
-int HAdvice(UIArguments args, UIInputDelegater dg)
+int Handlers::advice(UIArguments args, UIInputDelegater dg)
 {
     UIGlobal::set(UFAskAdvice);
     return 0;
 }
 
-int HAskMainmenu(UIArguments args, UIInputDelegater dg)
+int Handlers::askMainmenu(UIArguments args, UIInputDelegater dg)
 {
     HChoiceDelegater h(&UFMainmenu);
     function<void()> doings[] = {
@@ -90,7 +90,7 @@ int HAskMainmenu(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HAskCityMgr(UIArguments args, UIInputDelegater dg)
+int Handlers::askCityMgr(UIArguments args, UIInputDelegater dg)
 {
     HChoiceDelegater h(&UFCityMgr);
     function<void()> doings[] = {
@@ -109,7 +109,7 @@ int HAskCityMgr(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HAskRouteMgr(UIArguments args, UIInputDelegater dg)
+int Handlers::askRouteMgr(UIArguments args, UIInputDelegater dg)
 {    
     HChoiceDelegater h(&UFRouteMgr);
     function<void()> doings[] = {
@@ -127,7 +127,7 @@ int HAskRouteMgr(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HAskAdvice(UIArguments args, UIInputDelegater dg)
+int Handlers::askAdvice(UIArguments args, UIInputDelegater dg)
 {    
     HChoiceDelegater h(&UFAskAdvice);
     function<void()> doings[] = {
@@ -145,7 +145,7 @@ int HAskAdvice(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HCityAdd(UIArguments args, UIInputDelegater dg)
+int Handlers::cityAdd(UIArguments args, UIInputDelegater dg)
 {
     static function<void()> resOK = []()
     {
@@ -162,7 +162,7 @@ int HCityAdd(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HCityEdit(UIArguments args, UIInputDelegater dg)
+int Handlers::cityEdit(UIArguments args, UIInputDelegater dg)
 {
     static function<void()> resOK = []()
     {
@@ -180,7 +180,7 @@ int HCityEdit(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HCityDelete(UIArguments args, UIInputDelegater dg)
+int Handlers::cityDelete(UIArguments args, UIInputDelegater dg)
 {
     static function<void()> resOK = []()
     {
@@ -197,14 +197,14 @@ int HCityDelete(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HCityList(UIArguments args, UIInputDelegater dg)
+int Handlers::cityList(UIArguments args, UIInputDelegater dg)
 {
     Service::loadCity(UFCityList); 
     UIGlobal::setAndClear(UFCityMgr);
     return 0;
 }
 
-int HRouteAdd(UIArguments args, UIInputDelegater dg)
+int Handlers::routeAdd(UIArguments args, UIInputDelegater dg)
 {
     static function<void()> resOK = []()
     {
@@ -230,7 +230,7 @@ int HRouteAdd(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HRouteDelete(UIArguments args, UIInputDelegater dg)
+int Handlers::routeDelete(UIArguments args, UIInputDelegater dg)
 {
     static function<void()> resOK = []()
     {
@@ -252,7 +252,7 @@ int HRouteDelete(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HRouteList(UIArguments args, UIInputDelegater dg)
+int Handlers::routeList(UIArguments args, UIInputDelegater dg)
 {
     Service::loadRoute(UFRouteList); 
     UIGlobal::setAndClear(UFRouteMgr);
@@ -260,7 +260,7 @@ int HRouteList(UIArguments args, UIInputDelegater dg)
 }
 
 template<typename T>
-static int TAskL(UIArguments args, UIInputDelegater dg)
+int Handlers::askL(UIArguments args, UIInputDelegater dg)
 {
     static function<void()> resNoway = []()
     {
@@ -305,17 +305,17 @@ static int TAskL(UIArguments args, UIInputDelegater dg)
     return 0;
 }
 
-int HAskLprice(UIArguments args, UIInputDelegater dg)
+int Handlers::askLprice(UIArguments args, UIInputDelegater dg)
 {
-    return TAskL<Algorithm::LessPrice>(args, dg);
+    return askL<Algorithm::LessPrice>(args, dg);
 }
 
-int HAskLtime(UIArguments args, UIInputDelegater dg)
+int Handlers::askLtime(UIArguments args, UIInputDelegater dg)
 {
-    return TAskL<Algorithm::LessTime>(args, dg);
+    return askL<Algorithm::LessTime>(args, dg);
 }
 
-int HAskLtrans(UIArguments args, UIInputDelegater dg)
+int Handlers::askLtrans(UIArguments args, UIInputDelegater dg)
 {
-    return TAskL<Algorithm::LessTrans>(args, dg);
+    return askL<Algorithm::LessTrans>(args, dg);
 }

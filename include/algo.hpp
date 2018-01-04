@@ -1,15 +1,8 @@
 #pragma once
+#include"io.h"
 #include"utils.h"
 #include<vector>
-#include<algorithm>
 #include<queue>
-#include<iostream>
-#include"io.h"
-
-struct Path {
-    long tp, power, tm;
-    std::vector<Route> travel;
-};
 
 class Algorithm {
 public:

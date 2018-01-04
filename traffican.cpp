@@ -10,14 +10,5 @@ int main(int argc, char *argv[])
     UIGlobal::set(UFMainmenu);
     UIGlobal::main();
     IO::WriteAll();
-    // UIForm form(HMainmenu, genericDelegater);
-    // vector<int> w = { 10, 10, 10 };
-    // vector<string> t = {"aa", "bbb", "ccccc"};
-    // vector<vector<string> > c= {
-    //     {"1","a", "A"},
-    //     {"2","b","B"}
-    // };
-    // form.put(w,t,c);
-    // form.act(cout);
     return 0;
 }

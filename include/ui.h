@@ -35,6 +35,7 @@ public:
         std::string val;
     };
 
+    static UIInputDelegater generic;
     long delegate(std::string content);
     Long getInt(long id);
     String getString(long id);

@@ -1,13 +1,11 @@
 #include"handler.h"
 
-UIInputDelegater genericDelegater;
-
-UIQuery UFAskMainmenu(HAskMainmenu, genericDelegater,
+UIQuery UFAskMainmenu(Handlers::askMainmenu, UIInputDelegater::generic,
 {
 "   > 请选择"
 });
 
-UINormal UFMainmenu(HMainmenu, genericDelegater,
+UINormal UFMainmenu(Handlers::mainmenu, UIInputDelegater::generic,
 {
 "  ================== 欢迎使用Traffican ==================  ",
 "                   1. 城市信息管理",
@@ -17,7 +15,7 @@ UINormal UFMainmenu(HMainmenu, genericDelegater,
 "  ======================================================  "
 });
 
-UINormal UFExit(HExit, genericDelegater,
+UINormal UFExit(Handlers::exit, UIInputDelegater::generic,
 {
 "\n",
 "  ======================================================  ",
@@ -27,7 +25,7 @@ UINormal UFExit(HExit, genericDelegater,
 "  ======================================================  "
 });
 
-UINormal UFCityMgr(HCityMgr, genericDelegater,
+UINormal UFCityMgr(Handlers::cityMgr, UIInputDelegater::generic,
 {
 "  ==================== 城市信息管理 =====================  ",
 "                   1. 列出现有城市",
@@ -38,31 +36,31 @@ UINormal UFCityMgr(HCityMgr, genericDelegater,
 "  ======================================================  "
 });
 
-UIQuery UFAskCityMgr(HAskCityMgr, genericDelegater,
+UIQuery UFAskCityMgr(Handlers::askCityMgr, UIInputDelegater::generic,
 {
 "   > 请选择"
 });
 
-UIQuery UFCityAdd(HCityAdd, genericDelegater,
+UIQuery UFCityAdd(Handlers::cityAdd, UIInputDelegater::generic,
 {
 "   > 城市名",
 "   > 城市介绍"
 });
 
-UIQuery UFCityEdit(HCityEdit, genericDelegater,
+UIQuery UFCityEdit(Handlers::cityEdit, UIInputDelegater::generic,
 {
 "   > 要修改的城市名",
 "   > 城市介绍"
 });
 
-UIQuery UFCityDelete(HCityDelete, genericDelegater,
+UIQuery UFCityDelete(Handlers::cityDelete, UIInputDelegater::generic,
 {
 "   > 城市名"
 });
 
-UIForm UFCityList(HCityList, genericDelegater);
+UIForm UFCityList(Handlers::cityList, UIInputDelegater::generic);
 
-UINormal UFRouteMgr(HRouteMgr, genericDelegater,
+UINormal UFRouteMgr(Handlers::routeMgr, UIInputDelegater::generic,
 {
 "  ==================== 交通线路管理 =====================  ",
 "                   1. 列出现有线路",
@@ -72,12 +70,12 @@ UINormal UFRouteMgr(HRouteMgr, genericDelegater,
 "  ======================================================  "
 });
 
-UIQuery UFAskRouteMgr(HAskRouteMgr, genericDelegater,
+UIQuery UFAskRouteMgr(Handlers::askRouteMgr, UIInputDelegater::generic,
 {
 "   > 请选择"
 });
 
-UIQuery UFRouteAdd(HRouteAdd, genericDelegater,
+UIQuery UFRouteAdd(Handlers::routeAdd, UIInputDelegater::generic,
 {
 "   > 起始城市",
 "   > 终点城市",
@@ -87,14 +85,14 @@ UIQuery UFRouteAdd(HRouteAdd, genericDelegater,
 "   > 票价(元)"
 });
 
-UIQuery UFRouteDelete(HRouteDelete, genericDelegater,
+UIQuery UFRouteDelete(Handlers::routeDelete, UIInputDelegater::generic,
 {
 "   > 路线ID"
 });
 
-UIForm UFRouteList(HRouteList, genericDelegater);
+UIForm UFRouteList(Handlers::routeList, UIInputDelegater::generic);
 
-UINormal UFAdvice(HAdvice, genericDelegater,
+UINormal UFAdvice(Handlers::advice, UIInputDelegater::generic,
 {
 "  ==================== 出行建议系统 =====================  ",
 "             请选择建议策略：",
@@ -105,26 +103,26 @@ UINormal UFAdvice(HAdvice, genericDelegater,
 "  ======================================================  "
 });
 
-UIQuery UFAskAdvice(HAskAdvice, genericDelegater,
+UIQuery UFAskAdvice(Handlers::askAdvice, UIInputDelegater::generic,
 {
 "   > 请选择"
 });
 
-UIQuery UFAskLtime(HAskLtime, genericDelegater,
+UIQuery UFAskLtime(Handlers::askLtime, UIInputDelegater::generic,
 {
 "   > 起点",
 "   > 终点",
 "   > 出发时间(时:分:秒)"
 });
 
-UIQuery UFAskLprice(HAskLprice, genericDelegater,
+UIQuery UFAskLprice(Handlers::askLprice, UIInputDelegater::generic,
 {
 "   > 起点",
 "   > 终点",
 "   > 出发时间(时:分:秒)"
 });
 
-UIQuery UFAskLtrans(HAskLtrans, genericDelegater,
+UIQuery UFAskLtrans(Handlers::askLtrans, UIInputDelegater::generic,
 {
 "   > 起点",
 "   > 终点",
