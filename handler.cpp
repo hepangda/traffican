@@ -1,7 +1,7 @@
 #include"handler.h"
 #include"utils.h"
 #include"services.h"
-#include"algo.h"
+#include"algo.hpp"
 using namespace std;
 extern long cityidMaker;
 
@@ -289,7 +289,7 @@ static int TAskL(UIArguments args, UIInputDelegater dg)
                  << " 乘坐 " << Service::typeStringFromID(ret.travel[i].type)
                  << " 由 " << Service::cityStringFromID(ret.travel[i].from) << " 前往 " 
                  << Service::cityStringFromID(ret.travel[i].to)
-                 << " , 并于 " << Service::timeFromTimet(ret.travel[i].ends) << " 到达." << endl;
+                 << ",并于 " << Service::timeFromTimet(ret.travel[i].ends) << " 到达." << endl;
         }
         cout << endl;
         cout << "  @ 本次旅行, 共耗时 " << Service::timeFromTimet(timeMinus(ret.travel.back().ends, tm))
