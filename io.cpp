@@ -8,8 +8,8 @@ extern long idMaker;
 extern long cityidMaker;
 vector<City> IOCity;
 vector<Route> IORoute;
-const char IO::CityFile[] = "City.dat";
-const char IO::RouteFile[] = "Route.dat";
+const char IO::CityFile[] = "data/City.dat";
+const char IO::RouteFile[] = "data/Route.dat";
 
 int IO::WriteCity()
 {

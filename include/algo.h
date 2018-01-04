@@ -5,6 +5,7 @@
 #include<queue>
 #include<iostream>
 #include"io.h"
+
 struct Path {
     long tp, power, tm;
     std::vector<Route> travel;
@@ -29,7 +30,7 @@ public:
     struct LessTime {
         long operator()(long ori, Route &r)
         {
-            return timeAdd(ori, timeMinus(r.ends, r.starts));
+            return r.ends;
         }
     };
 
@@ -67,7 +68,7 @@ public:
     {
         std::vector<Route> ret;
         for (auto &i: IORoute) {
-            if (i.from == id && i.starts > tm)
+            if (i.from == id)
                 ret.push_back(i);
         }
         return ret;

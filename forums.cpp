@@ -114,19 +114,19 @@ UIQuery UFAskLtime(HAskLtime, genericDelegater,
 {
 "   > 起点",
 "   > 终点",
-"   > 出发时间"
+"   > 出发时间(时:分:秒)"
 });
 
 UIQuery UFAskLprice(HAskLprice, genericDelegater,
 {
 "   > 起点",
 "   > 终点",
-"   > 出发时间"
+"   > 出发时间(时:分:秒)"
 });
 
 UIQuery UFAskLtrans(HAskLtrans, genericDelegater,
 {
 "   > 起点",
 "   > 终点",
-"   > 出发时间"
+"   > 出发时间(时:分:秒)"
 });

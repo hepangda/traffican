@@ -282,13 +282,18 @@ static int TAskL(UIArguments args, UIInputDelegater dg)
         auto ret = Algorithm::dijkstra<T>(from, to, tm);
 
         cout << "  # 根据您的要求，已为您选择最适合的出行方式：  " << endl << endl;
-
+        long costs = 0;
         for (int i = 0; i < ret.travel.size(); i++) {
-            cout << "   > " << i + 1<< ". " << "乘坐 " << Service::typeStringFromID(ret.travel[i].type)
+            costs += ret.travel[i].price;
+            cout << "   > " << i + 1<< ". 于 " << Service::timeFromTimet(ret.travel[i].starts)
+                 << " 乘坐 " << Service::typeStringFromID(ret.travel[i].type)
                  << " 由 " << Service::cityStringFromID(ret.travel[i].from) << " 前往 " 
-                 << Service::cityStringFromID(ret.travel[i].to) << endl;
+                 << Service::cityStringFromID(ret.travel[i].to)
+                 << " , 并于 " << Service::timeFromTimet(ret.travel[i].ends) << " 到达." << endl;
         }
-        cout << endl << endl;
+        cout << endl;
+        cout << "  @ 本次旅行, 共耗时 " << Service::timeFromTimet(timeMinus(ret.travel.back().ends, tm))
+             << " , 耗费 " << costs << " 元, 中转 " << ret.travel.size() - 1 << " 站." << endl << endl;
 
         if (ret.tp == -1)
             UIGlobal::clear(resNoway);
