@@ -129,7 +129,7 @@ int Handlers::askRouteMgr(UIArguments args, UIInputDelegater dg)
 
 int Handlers::askAdvice(UIArguments args, UIInputDelegater dg)
 {    
-    HChoiceDelegater h(&UFAskAdvice);
+    HChoiceDelegater h(&UFAdvice);
     function<void()> doings[] = {
        []() { UIGlobal::set(UFAskLtime); },
        []() { UIGlobal::set(UFAskLprice); },
