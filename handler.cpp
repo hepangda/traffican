@@ -5,7 +5,7 @@
 using namespace std;
 extern long cityidMaker;
 
-void HChoiceDelegater::DEFAULT_FAULT()
+void HChoiceDelegater::defaultFault()
 {
     UIGlobal::clear([]()
     {
@@ -16,7 +16,7 @@ void HChoiceDelegater::DEFAULT_FAULT()
 
 void HChoiceDelegater::execFault()
 {
-    return (hasFault ? ferr() : DEFAULT_FAULT());
+    return (hasFault ? ferr() : defaultFault());
 }
 
 void HChoiceDelegater::bind(int x, function<void()> f)

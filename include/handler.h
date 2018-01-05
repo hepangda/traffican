@@ -39,7 +39,7 @@ private:
     bool hasFault = false;
     UINormal *prevUI;
 
-    void DEFAULT_FAULT();
+    void defaultFault();
     void execFault();
 public:
     HChoiceDelegater(UINormal *prevUI): prevUI(prevUI) {}
